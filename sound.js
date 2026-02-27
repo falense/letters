@@ -1,10 +1,11 @@
 const SOUND_KEY = 'letters-sound-enabled';
 
-const positiveFiles = ['sounds/positive_0.wav', 'sounds/positive_1.wav'];
+const base = import.meta.env.BASE_URL;
+const positiveFiles = [`${base}sounds/positive_0.wav`, `${base}sounds/positive_1.wav`];
 const negativeFiles = [
-  'sounds/negative_0.wav',
-  'sounds/negative_1.wav',
-  'sounds/negative_2.wav',
+  `${base}sounds/negative_0.wav`,
+  `${base}sounds/negative_1.wav`,
+  `${base}sounds/negative_2.wav`,
 ];
 
 let positiveAudios = [];

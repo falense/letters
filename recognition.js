@@ -9,7 +9,7 @@ const LABELS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export async function loadModel() {
   try {
-    model = await tf.loadLayersModel('./model/model.json');
+    model = await tf.loadLayersModel(import.meta.env.BASE_URL + 'model/model.json');
     console.log('Loaded EMNIST model');
   } catch (err) {
     console.error('Failed to load model:', err);
