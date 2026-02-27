@@ -1,7 +1,7 @@
 import { ALPHABET } from './letters.js';
 import { setupCanvas } from './canvas.js';
 import { loadModel, recognizeLetter } from './recognition.js';
-import { initSound, playPositive, playNegative, toggleSound, isSoundEnabled } from './sound.js';
+import { initSound, playPositive, playNegative, playLetter, toggleSound, isSoundEnabled } from './sound.js';
 
 let currentIndex = 0;
 let canvas = null;
@@ -23,6 +23,7 @@ function updateLetter() {
   canvas.clear();
   hideFeedback();
   cancelPendingRecognition();
+  playLetter(ALPHABET[currentIndex]);
 }
 
 function prevLetter() {
@@ -125,6 +126,8 @@ async function init() {
     hideFeedback();
     cancelPendingRecognition();
   });
+
+  targetLetterEl.addEventListener('click', () => playLetter(ALPHABET[currentIndex]));
 
   soundBtn.textContent = isSoundEnabled() ? '\u{1F50A}' : '\u{1F507}';
   soundBtn.addEventListener('click', () => {
