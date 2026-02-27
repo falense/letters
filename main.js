@@ -64,8 +64,8 @@ function showFeedback(success) {
     setTimeout(() => {
       hideFeedback();
       currentIndex = (currentIndex + 1) % ALPHABET.length;
-      updateLetter({ delaySound: 500 });
-    }, 3000);
+      updateLetter({ delaySound: 1000 });
+    }, 2000);
   } else {
     feedbackEl.innerHTML = '<div class="feedback-content">💪</div>';
     playNegative();
