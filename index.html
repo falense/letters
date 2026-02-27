@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Bokstavlære</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="loading-screen">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Laster bokstaver...</p>
+      </div>
+    </div>
+
+    <div id="main-screen" class="hidden">
+      <canvas id="draw-canvas"></canvas>
+
+      <div id="overlay">
+        <div id="target-letter-container">
+          <button id="prev-btn" class="nav-btn" aria-label="Forrige bokstav">&#9664;</button>
+          <div id="target-letter">A</div>
+          <button id="next-btn" class="nav-btn" aria-label="Neste bokstav">&#9654;</button>
+        </div>
+
+        <button id="clear-btn" aria-label="Slett">🗑️</button>
+        <button id="sound-btn" aria-label="Lyd av/på">🔊</button>
+      </div>
+
+      <div id="feedback" class="hidden"></div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
