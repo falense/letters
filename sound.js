@@ -43,10 +43,13 @@ export function initSound() {
 }
 
 export function playPositive() {
-  if (!soundEnabled || positiveAudios.length === 0) return;
+  if (!soundEnabled || positiveAudios.length === 0) return Promise.resolve();
   const audio = pick(positiveAudios);
   audio.currentTime = 0;
-  audio.play().catch(() => {});
+  return new Promise((resolve) => {
+    audio.onended = resolve;
+    audio.play().catch(resolve);
+  });
 }
 
 export function playNegative() {

@@ -59,13 +59,13 @@ function showFeedback(success) {
   if (success) {
     feedbackEl.innerHTML = '<div class="feedback-content">⭐</div>';
     spawnParticles();
-    playPositive();
-
-    setTimeout(() => {
-      hideFeedback();
-      currentIndex = (currentIndex + 1) % ALPHABET.length;
-      updateLetter({ delaySound: 1000 });
-    }, 2000);
+    playPositive().then(() => {
+      setTimeout(() => {
+        hideFeedback();
+        currentIndex = (currentIndex + 1) % ALPHABET.length;
+        updateLetter({ delaySound: 800 });
+      }, 500);
+    });
   } else {
     feedbackEl.innerHTML = '<div class="feedback-content">💪</div>';
     playNegative();
