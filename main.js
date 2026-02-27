@@ -60,7 +60,7 @@ function showFeedback(success) {
     setTimeout(() => {
       hideFeedback();
       nextLetter();
-    }, 1500);
+    }, 3000);
   } else {
     feedbackEl.innerHTML = '<div class="feedback-content">💪</div>';
     playNegative();
