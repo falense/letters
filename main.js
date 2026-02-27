@@ -18,12 +18,16 @@ const loadingScreen = document.getElementById('loading-screen');
 const mainScreen = document.getElementById('main-screen');
 const canvasEl = document.getElementById('draw-canvas');
 
-function updateLetter() {
+function updateLetter({ delaySound = 0 } = {}) {
   targetLetterEl.textContent = ALPHABET[currentIndex];
   canvas.clear();
   hideFeedback();
   cancelPendingRecognition();
-  playLetter(ALPHABET[currentIndex]);
+  if (delaySound > 0) {
+    setTimeout(() => playLetter(ALPHABET[currentIndex]), delaySound);
+  } else {
+    playLetter(ALPHABET[currentIndex]);
+  }
 }
 
 function prevLetter() {
@@ -59,7 +63,8 @@ function showFeedback(success) {
 
     setTimeout(() => {
       hideFeedback();
-      nextLetter();
+      currentIndex = (currentIndex + 1) % ALPHABET.length;
+      updateLetter({ delaySound: 500 });
     }, 3000);
   } else {
     feedbackEl.innerHTML = '<div class="feedback-content">💪</div>';
