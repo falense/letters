@@ -7,6 +7,7 @@ let currentIndex = 0;
 let canvas = null;
 let recognizeTimer = null;
 let checking = false;
+let transitioning = false;
 
 const targetLetterEl = document.getElementById('target-letter');
 const prevBtn = document.getElementById('prev-btn');
@@ -49,20 +50,22 @@ function cancelPendingRecognition() {
 
 function scheduleRecognition() {
   cancelPendingRecognition();
-  if (checking) return;
-  recognizeTimer = setTimeout(checkDrawing, 1500);
+  if (checking || transitioning) return;
+  recognizeTimer = setTimeout(checkDrawing, 2500);
 }
 
 function showFeedback(success) {
   feedbackEl.classList.remove('hidden');
 
   if (success) {
+    transitioning = true;
     feedbackEl.innerHTML = '<div class="feedback-content">⭐</div>';
     spawnParticles();
     playPositive().then(() => {
       setTimeout(() => {
         hideFeedback();
         currentIndex = (currentIndex + 1) % ALPHABET.length;
+        transitioning = false;
         updateLetter({ delaySound: 800 });
       }, 500);
     });
@@ -108,7 +111,7 @@ function spawnParticles() {
 
 async function checkDrawing() {
   const imageData = canvas.getImageData();
-  if (!imageData || checking) return;
+  if (!imageData || checking || transitioning) return;
 
   checking = true;
   const target = ALPHABET[currentIndex];
